@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo-Brutalist Site - Solarized Dark</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #211951; /* Deep blue */
+            color: #F0F3FF; /* Soft off-white */
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #836FFF; /* Vibrant purple */
+            color: #F0F3FF; /* Soft off-white */
+            padding: 1rem;
+            font-size: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-link {
+            color: #F0F3FF; /* Soft off-white */
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 1rem;
+        }
+        .menu-link:last-child {
+            margin-right: 0;
+        }
+        .menu-link:hover, .menu-link:focus {
+            color: #15F5BA; /* Bright teal */
+            text-decoration: underline;
+        }
+        .card {
+            border: 2px solid #836FFF; /* Vibrant purple */
+            background-color: #211951; /* Deep blue */
+        }
+        .card h2, .card p {
+            color: #F0F3FF; /* Soft off-white */
+        }
+        .card p {
+            background-color: #836FFF; /* Vibrant purple */
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+  <header class="header">
+        Can AI do that?
+        <nav>
+            <a href="#" class="menu-link">Home</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScdZMemvK_Qzg2W8YghHF89P12Gt3bXfHe6C2rIcww4m0DZhg/viewform" class="menu-link">Subit Example!</a>
+            <a href="#" class="menu-link">Services</a>
+            <a href="#" class="menu-link">Contact</a>
+        </nav>
+    </header>
+    <div class="pt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+        {% for card in cards %}
+            <div class="card p-6 m-2 rounded-none shadow-none">
+                <h2 class="font-bold text-xl mb-4">{{ card.prompt }}</h2>
+                <p>Answer: {{ card.answer }}</p>
+                <p>Result: {{ card.result }}</p>
+                <p>Model: {{ card.model }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
+
