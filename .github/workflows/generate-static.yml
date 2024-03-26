@@ -33,6 +33,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: willaidothis.com # e.g. 'my-project'
+          projectName: canaidothat.pages.dev # e.g. 'my-project'
           directory: static # e.g. 'dist'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
