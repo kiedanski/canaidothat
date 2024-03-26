@@ -21,13 +21,15 @@ def download_sheet_as_json():
 
             # out_file.write(data)  # Write the data to a local file
         print(f'File downloaded')
+        return data
     except Exception as e:
         print(f'Error downloading the file: {e}')
+
 
 if os.path.exists(SAVE_PATH):
     with open(SAVE_PATH, "r") as fh: data = json.load(fh)
 else:
-    download_sheet_as_json()
+    data = download_sheet_as_json()
 
 
 
