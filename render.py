@@ -39,13 +39,13 @@ env = Environment(
 )
 
 # Load the template
-template = env.get_template('index.html')
+template = env.get_template('base.html')
 
 # Render the template with data
 html_output = template.render(cards=data)
 
 # Save the rendered HTML to a file
-with open('output.html', 'w') as f:
+with open('index.html', 'w') as f:
     f.write(html_output)
 
 print("Site generated successfully.")
