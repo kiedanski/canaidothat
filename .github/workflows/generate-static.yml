@@ -27,8 +27,6 @@ jobs:
       - name: Run script
         run: |
           python render.py
-          mkdir -p static/
-          mv output.html static/
 
       - name: Publish
         uses: cloudflare/pages-action@1

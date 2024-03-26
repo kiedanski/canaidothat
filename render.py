@@ -46,8 +46,10 @@ template = env.get_template('base.html')
 # Render the template with data
 html_output = template.render(cards=data)
 
+os.makedirs("static", exist_ok=True)
+
 # Save the rendered HTML to a file
-with open('index.html', 'w') as f:
+with open('static/index.html', 'w') as f:
     f.write(html_output)
 
 print("Site generated successfully.")
