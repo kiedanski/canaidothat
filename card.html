@@ -20,7 +20,7 @@
     <div class="mb-8">
         <div class="bg-white p-6 rounded-lg border-l-4 border-blue-500 shadow-md">
             <h2 class="text-lg font-semibold mb-4">Prompt</h2>
-	    <p>{{card.prompt}}</p>
+	    <p>{{card.prompt | safe}}</p>
         </div>
     </div>
 
@@ -37,10 +37,10 @@
     <div>
         <div class="bg-white p-6 rounded-lg border-l-4 border-yellow-500 shadow-md">
             <h2 class="text-lg font-semibold mb-4">Analysis</h2>
-	    <!-- <p>{{card.analysis}}</p> -->
-	     <pre class="bg-gray-800 text-green-400 p-4 mt-4 rounded-lg overflow-x-auto"><code>
-		{{card.analysis}}
-	     </code></pre>
+	    <p>{{card.analysis | safe}}</p>
+	     <!-- <pre class="bg-gray-800 text-green-400 p-4 mt-4 rounded-lg overflow-x-auto"><code> -->
+		<!-- {{card.analysis}} -->
+	     <!-- </code></pre> -->
         </div>
     </div>
     {% endif %}
