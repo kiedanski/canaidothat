@@ -1,4 +1,5 @@
 import datetime
+import re
 import markdown
 import bleach
 import urllib.request
@@ -17,6 +18,18 @@ os.makedirs("static", exist_ok=True)
 os.makedirs("static/img", exist_ok=True)
 
 last_updated = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+
+
+def make_url_safe_remove_unsafe(s):
+    # Convert the string to lowercase
+    s_lower = s.lower()
+    # Replace whitespace with hyphens
+    s_hyphens = s_lower.replace(' ', '-')
+    # Remove characters that are not safe for URLs (keeping only alphanumerics and hyphens)
+    s_safe = re.sub(r'[^a-z0-9-]', '', s_hyphens)
+    return s_safe
+
+# Test the function with a sample string
 
 def download_sheet_as_json():
 
@@ -56,6 +69,7 @@ def download_file_from_google_drive(url, destination):
     print(f"File has been downloaded to: {destination}")
 
 def card_to_html(card_json):
+    card_json["id"] = make_url_safe_remove_unsafe(card_json["title"])
     id_ = card_json["id"]
 
     card_json["front"] = card_json["prompt"].strip()
@@ -79,16 +93,13 @@ def card_to_html(card_json):
     return card_json
 
 data = []
+download_images = False
 if os.path.exists(SAVE_PATH):
     print("Skipping download")
     with open(SAVE_PATH, "r") as fh: data = json.load(fh)
 else:
     data = download_sheet_as_json()
-    for card in data:
-        img1 = card.get("img1", None)
-        id_ = card.get("id", None)
-        if img1 and id_:
-            download_file_from_google_drive(img1, f"static/img/{id_}_1.jpg")
+    download_images = True
 
 data = list(filter(lambda x: x["id"] != "", data))
 
@@ -97,6 +108,12 @@ for i, card in enumerate(data):
     card = card_to_html(card)
     data[i] = card
 
+if download_images:
+    for card in data:
+        img1 = card.get("img1", None)
+        id_ = card.get("id", None)
+        if img1 and id_:
+            download_file_from_google_drive(img1, f"static/img/{id_}_1.jpg")
 
 
 
@@ -107,7 +124,7 @@ env = Environment(
 )
 
 # Load the template
-template = env.get_template('base.html')
+template = env.get_template('main.html')
 
 # Render the template with data
 html_output = template.render(cards=data, last_updated=last_updated)
