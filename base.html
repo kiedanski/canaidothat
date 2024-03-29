@@ -2,6 +2,13 @@
 
 <html lang="en">
 <head>
+
+  <meta property="og:title" content="Will AI Do This?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://willaidothis.com" />
+  <!-- <meta property="og:image" content="http://my.site.com/images/thumb.png" /> -->
+  <meta property="og:description" content="The repository for LLM prompts and AI experiments" />
+  <meta name="theme-color" content="#FF0000">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Will AI do this?</title>
@@ -10,6 +17,20 @@
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_LGBVTdFpaZ0JubjntAyAWDqEklsBXRPSQTJbLM1ntVU',{api_host:'https://app.posthog.com'})
+</script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  var path = window.location.pathname;
+  // Assuming your card URLs follow the pattern /id1.html, /id2.html, etc.
+  var cardRegex = /^\/(id\d+)\.html$/;
+  var match = path.match(cardRegex);
+  if (match) {
+    // Construct the htmx request to load the specific card
+    var url = "/" + match[1] + ".html";
+    // You might need to adjust this to target the correct element or use a different method to trigger htmx loading
+    hx.trigger("#main", "load", {detail: {url: url}});
+  }
+});
 </script>
 </head>
 
@@ -37,7 +58,7 @@
           {% endif %}
       </h5>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" style="max-width:100ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{card.front | safe}}</p>
-      <a hx-get="/{{card.id}}.html" hx-trigger="click" hx-target="#main" hx-swap="innerHTML" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      <a hx-get="/{{card.id}}.html" hx-push-url="true" hx-trigger="click" hx-target="#main" hx-swap="innerHTML" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Read more
         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
