@@ -1,3 +1,5 @@
+import markdown
+import bleach
 import urllib.request
 import os
 import csv
@@ -27,6 +29,7 @@ def download_sheet_as_json():
 
 
 if os.path.exists(SAVE_PATH):
+    print("Skipping download")
     with open(SAVE_PATH, "r") as fh: data = json.load(fh)
 else:
     data = download_sheet_as_json()
@@ -54,3 +57,15 @@ with open('static/index.html', 'w') as f:
 
 print("Site generated successfully.")
 
+
+card_template = env.get_template("card.html")
+for card in data:
+    card_id = card["id"]
+    html_content = html_content = markdown.markdown(card["answer"])
+    safe_html_content = bleach.clean(html_content, tags=['p', 'strong', 'em', 'ul', 'li', 'h1', 'h2', 'h3', 'pre', 'code'], strip=True)
+    card["answer"] = safe_html_content
+
+
+    card_output = card_template.render(card=card)
+    with open(f"static/{card_id}.html", "w") as f:
+        f.write(card_output)
