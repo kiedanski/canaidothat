@@ -1,3 +1,4 @@
+import datetime
 import markdown
 import bleach
 import urllib.request
@@ -14,6 +15,8 @@ SAVE_PATH = 'data.json'
 
 os.makedirs("static", exist_ok=True)
 os.makedirs("static/img", exist_ok=True)
+
+last_updated = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
 def download_sheet_as_json():
 
@@ -107,7 +110,7 @@ env = Environment(
 template = env.get_template('base.html')
 
 # Render the template with data
-html_output = template.render(cards=data)
+html_output = template.render(cards=data, last_updated=last_updated)
 
 
 # Save the rendered HTML to a file
