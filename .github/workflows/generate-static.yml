@@ -1,4 +1,8 @@
-on: [push]
+on:
+  schedule:
+    - cron:  '37 * * * *'
+  push:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
