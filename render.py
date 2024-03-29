@@ -12,6 +12,9 @@ SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRRJBT6BewhEneccXKd
 
 SAVE_PATH = 'data.json'
 
+os.makedirs("static", exist_ok=True)
+os.makedirs("static/img", exist_ok=True)
+
 def download_sheet_as_json():
 
     try:
@@ -91,8 +94,6 @@ for i, card in enumerate(data):
     card = card_to_html(card)
     data[i] = card
 
-os.makedirs("static", exist_ok=True)
-os.makedirs("static/img", exist_ok=True)
 
 
 
