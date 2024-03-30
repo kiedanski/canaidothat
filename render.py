@@ -142,6 +142,6 @@ print("Site generated successfully.")
 card_template = env.get_template("card.html")
 for card in data:
     card_id = card["id"]
-    card_output = card_template.render(card=card)
+    card_output = card_template.render(card=card, last_updated=last_updated)
     with open(f"static/{card_id}.html", "w") as f:
         f.write(card_output)

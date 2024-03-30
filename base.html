@@ -1,29 +1,49 @@
 {% include "header.html" %}
-<body>
+<body class="flex flex-col h-screen">
 
-<div class="h-screen flex flex-col">
-  <nav class="bg-gray-800 text-white p-2">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-xl font-semibold">Will AI Do This?</a>
-            <a class="text-xs"> Last Updated: {{last_updated}} </a>
-            <div class="flex space-x-4">
-                <a href="/" class="hover:bg-gray-700 p-2 rounded">Home</a>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLScdZMemvK_Qzg2W8YghHF89P12Gt3bXfHe6C2rIcww4m0DZhg/viewform?usp=pp_url&entry.704889696=I+agree+to+receive+email+updates+and+promotional+material+from+WillAIDoThis." class="hover:bg-gray-700 p-2 rounded">Submit Example!</a>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSem8d24ADKWRy54EaQXtgiUa6w7n8xJb6pSTiVEkl72V6HeQg/viewform" class="hover:bg-gray-700 p-2 rounded">Feedback</a>
-            </div>
+<nav class="bg-gray-800 p-3 text-white">
+    <div class="container mx-auto flex flex-wrap justify-between items-center">
+        <a href="/" class="text-xl font-semibold">Will AI Do This?</a>
+        <div class="flex md:hidden">
+            <button id="nav-toggle" class="text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </div>
-    </nav>
+        <div class="w-full md:block md:w-auto" id="nav-content">
+            <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                <li>
+                    <a href="/" class="block py-2 pr-4 pl-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:p-0">Home</a>
+                </li>
+                <li>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScdZMemvK_Qzg2W8YghHF89P12Gt3bXfHe6C2rIcww4m0DZhg/viewform?usp=pp_url&entry.704889696=I+agree+to+receive+email+updates+and+promotional+material+from+WillAIDoThis." class="block py-2 pr-4 pl-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:p-0">Submit Example!</a>
+                </li>
+                <li>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSem8d24ADKWRy54EaQXtgiUa6w7n8xJb6pSTiVEkl72V6HeQg/viewform" class="block py-2 pr-4 pl-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:p-0">Feedback</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-  <div class="flex-col space-y-2 flex-1 bg-gray-100 overflow-auto px-10 p-2" id="main">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var navToggle = document.getElementById('nav-toggle');
+        var navContent = document.getElementById('nav-content');
+        navToggle.addEventListener('click', function () {
+            navContent.classList.toggle('hidden');
+        });
+    });
+</script>
 
-  {% block content %}{% endblock %}
-
-  </div>
-
-  <footer class="flex h-10 bg-gray-800 justify-center">
-	  <p class="text-white"> Made with ❤ by </p>
-  </footer>
-
+<div class="flex flex-col flex-1">
+    <main class="flex-1 bg-gray-100 p-4 md:p-8 overflow-auto" id="main">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="bg-gray-800 p-4 text-white text-center">
+        Made with ❤ by
+    </footer>
 </div>
+
 </body>
 </html>
+
