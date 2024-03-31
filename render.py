@@ -69,7 +69,7 @@ def download_file_from_google_drive(url, destination):
     print(f"File has been downloaded to: {destination}")
 
 def card_to_html(card_json):
-    card_json["id"] = make_url_safe_remove_unsafe(card_json["title"])
+    card_json["id"] = make_url_safe_remove_unsafe(card_json["title"]) + f"-{card_json['id']}"
     id_ = card_json["id"]
 
     card_json["front"] = card_json["prompt"].strip()
