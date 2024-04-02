@@ -1,3 +1,4 @@
+import shutil
 import datetime
 import re
 import markdown
@@ -14,18 +15,20 @@ SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRRJBT6BewhEneccXKd
 
 SAVE_PATH = 'data.json'
 
+shutil.rmtree("static/")
 os.makedirs("static", exist_ok=True)
 os.makedirs("static/img", exist_ok=True)
+
+shutil.copy("libs/htmx.org@1.9.11", "static/")
+shutil.copy("libs/tailwind.min.css", "static/")
+
 
 last_updated = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
 
 def make_url_safe_remove_unsafe(s):
-    # Convert the string to lowercase
     s_lower = s.lower()
-    # Replace whitespace with hyphens
     s_hyphens = s_lower.replace(' ', '-')
-    # Remove characters that are not safe for URLs (keeping only alphanumerics and hyphens)
     s_safe = re.sub(r'[^a-z0-9-]', '', s_hyphens)
     return s_safe
 
@@ -83,7 +86,7 @@ def card_to_html(card_json):
         if key == "front":
             if "@img1" in safe_answer:
                 card_json["has_image"] = True
-            safe_answer = safe_answer.replace("@img1", "")
+            safe_answer = safe_answer.replace("@img1", "").replace("<br>", "")
         else:
             safe_answer = safe_answer.replace("@img1", f"<img style='width:600px' src='img/{id_}_1.jpg'>")
 
@@ -119,7 +122,7 @@ if download_images:
 
 # Set up Jinja2 environment
 env = Environment(
-    loader=FileSystemLoader('.'),
+    loader=FileSystemLoader('templates/'),
     autoescape=select_autoescape(['html', 'xml'])
 )
 
@@ -127,7 +130,7 @@ env = Environment(
 template = env.get_template('main.html')
 
 # Render the template with data
-html_output = template.render(cards=data, last_updated=last_updated)
+html_output = template.render(cards=data, last_updated=last_updated, subpage_title="Will AI")
 
 
 # Save the rendered HTML to a file
@@ -142,6 +145,6 @@ print("Site generated successfully.")
 card_template = env.get_template("card.html")
 for card in data:
     card_id = card["id"]
-    card_output = card_template.render(card=card, last_updated=last_updated)
+    card_output = card_template.render(card=card, last_updated=last_updated, subpage_title=card["title"])
     with open(f"static/{card_id}.html", "w") as f:
         f.write(card_output)
