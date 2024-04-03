@@ -15,7 +15,7 @@ SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRRJBT6BewhEneccXKd
 
 SAVE_PATH = 'data.json'
 
-shutil.rmtree("static/", ignore_errors=True)
+# shutil.rmtree("static/", ignore_errors=True)
 os.makedirs("static", exist_ok=True)
 os.makedirs("static/img", exist_ok=True)
 
@@ -78,10 +78,16 @@ def card_to_html(card_json):
     card_json["front"] = card_json["prompt"].strip()
     card_json["has_image"] = False
 
+
+
+    has_image = False
     for key in ["front", "prompt", "answer", "analysis"]:
         text = card_json[key]
         html = markdown.markdown(text).replace("\\n", "<br>")
         safe_answer = bleach.clean(html, tags=['p', 'strong', 'em', 'ul', 'li', 'h1', 'h2', 'h3', 'pre', 'code', 'br'], strip=True)
+
+        if "@img1" in text:
+            has_image = True
 
         if key == "front":
             if "@img1" in safe_answer:
@@ -92,6 +98,9 @@ def card_to_html(card_json):
 
         safe_answer = safe_answer.replace("<br><br>", "<br>")
         card_json[key] = safe_answer
+
+    if has_image:
+        card_json["image"] = f"img/{id_}_1.jpg"
 
     return card_json
 
@@ -145,6 +154,6 @@ print("Site generated successfully.")
 card_template = env.get_template("card.html")
 for card in data:
     card_id = card["id"]
-    card_output = card_template.render(card=card, last_updated=last_updated, subpage_title=card["title"])
+    card_output = card_template.render(card=card, last_updated=last_updated, subpage_title=card["title"], main_image=card.get("image", None))
     with open(f"static/{card_id}.html", "w") as f:
         f.write(card_output)
