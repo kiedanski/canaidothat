@@ -15,7 +15,7 @@ SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRRJBT6BewhEneccXKd
 
 SAVE_PATH = 'data.json'
 
-shutil.rmtree("static/")
+shutil.rmtree("static/", ignore_errors=True)
 os.makedirs("static", exist_ok=True)
 os.makedirs("static/img", exist_ok=True)
 
