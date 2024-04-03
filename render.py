@@ -139,7 +139,7 @@ env = Environment(
 template = env.get_template('main.html')
 
 # Render the template with data
-html_output = template.render(cards=data, last_updated=last_updated, subpage_title="Will AI")
+html_output = template.render(cards=data, last_updated=last_updated, subpage_title="Will AI", main_image=None)
 
 
 # Save the rendered HTML to a file
@@ -154,6 +154,6 @@ print("Site generated successfully.")
 card_template = env.get_template("card.html")
 for card in data:
     card_id = card["id"]
-    card_output = card_template.render(card=card, last_updated=last_updated, subpage_title=card["title"], main_image=card.get("image", None))
+    card_output = card_template.render(card=card, last_updated=last_updated, subpage_title=card["title"], main_image=card.get("image", None), domain="https://willaidothis.com")
     with open(f"static/{card_id}.html", "w") as f:
         f.write(card_output)
