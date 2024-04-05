@@ -20,7 +20,7 @@ def main():
 
     # Render individual cards, if needed
     for card in processed_data:
-        render_html('card.html', {'card': card}, f"static/{card['id']}.html")
+        render_html('card.html', {'card': card, 'title': card['title']}, f"static/{card['id']}.html")
 
 if __name__ == "__main__":
     main()
