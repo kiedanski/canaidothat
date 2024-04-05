@@ -4,7 +4,6 @@
 <nav class="bg-gray-800 p-3 text-white">
     <div class="container mx-auto flex flex-wrap justify-between items-center">
         <a href="/" class="text-xl font-semibold">Will AI Do This?</a>
-	<a class="text-xs"> Last Updated: {{last_updated}} </a>
         <div class="flex md:hidden">
             <button id="nav-toggle" class="text-white focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -41,15 +40,21 @@
 
 <div class="flex flex-col flex-1">
     <main class="flex-1 bg-gray-100 p-4 md:p-8 overflow-auto" id="main">
-        {% block content %}{% endblock %}
+        <!-- Content block placeholder -->
+         {% block content %}{% endblock %}
     </main>
-    <footer class="bg-gray-800 p-4 text-white text-center flex justify-center items-center gap-4">
-        <a href="https://kiedanski.com/" class="hover:underline flex items-center">
-          Made with <i class="fas fa-heart text-red-500 mr-2 ml-2"> </i> by Diego </a>
-        <span>|</span>
-        <a href="https://github.com/kiedanski/willaidothis.com" class="hover:underline flex items-center" target="_blank">
-            <i class="fab fa-github mr-2"></i>GitHub Project
-        </a>
+ <footer class="footer">
+       <div class="icons">
+            <a href="https://kiedanski.com/" class="hover:underline flex items-center">
+              Made with <i class="fas fa-heart heart"></i> by Diego 
+            </a>
+            <a href="https://github.com/kiedanski/willaidothis.com" class="hover:underline flex items-center" target="_blank">
+                <i class="fab fa-github mr-2"></i> GitHub Project
+            </a>
+       </div>
+        <div>
+            <a class="text-xs">Last Updated: {{last_updated}}</a>
+        </div>
     </footer>
 </div>
 
