@@ -2,3 +2,4 @@ Jinja2
 mistune
 markdown
 bleach
+pygments
