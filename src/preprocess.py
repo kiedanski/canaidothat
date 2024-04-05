@@ -81,10 +81,11 @@ def replace_image_placeholder(field, card):
 FIELDS_WITH_IMAGES = ["prompt", "answer", "analysis"]
 
 def card_to_html(card_json):
-    markdown_renderer = mistune.create_markdown(renderer=HighlightRenderer())
+
+    renderer = HighlightRenderer(escape=False)
+    markdown_renderer = mistune.Markdown(renderer=renderer)
 
     card_json["id"] = updated_id(card_json["title"], card_json["id"] )
-    card_id = card_json["id"]
 
     download_images(card_json)
 
@@ -94,33 +95,12 @@ def card_to_html(card_json):
 
     card_json["front"] = remove_image_tags(card_json["prompt"].strip())
 
-
-    # import json
-    # print(json.dumps(card_json, indent=2))
-
-    # has_image = False
     for key in ["front", "prompt", "answer", "analysis"]:
         text = card_json[key]
-        html = markdown_renderer(text) #.replace("\\n", "<br>")
+        html = markdown_renderer(text) 
 
-        safe_answer = bleach.clean(html, tags=['p', 'strong', 'em', 'ul', 'li', 'h1', 'h2', 'h3', 'pre', 'code', 'br'], strip=True)
-    #     safe_answer = add_pre_tags_around_code_regex(safe_answer)
+        card_json[key] = html 
 
-    #     if "@img1" in text:
-    #         has_image = True
-
-    #     if key == "front":
-    #         if "@img1" in safe_answer:
-    #             card_json["has_image"] = True
-    #         safe_answer = safe_answer.replace("@img1", "").replace("<br>", "")
-    #     else:
-    #         safe_answer = safe_answer.replace("@img1", f"<img style='width:600px' src='img/{card_id}_1.jpg'>")
-
-    #     safe_answer = safe_answer.replace("<br><br>", "<br>")
-        card_json[key] = safe_answer
-
-    # if has_image:
-    #     card_json["image"] = f"img/{card_id}_1.jpg"
     
 
     return card_json

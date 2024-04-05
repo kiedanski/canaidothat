@@ -1,5 +1,8 @@
 .venv/
 data.json
 faq.json
+data/
 output.html
 static/
+__pycache__/
+*.pyc
