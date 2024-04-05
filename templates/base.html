@@ -43,8 +43,13 @@
     <main class="flex-1 bg-gray-100 p-4 md:p-8 overflow-auto" id="main">
         {% block content %}{% endblock %}
     </main>
-    <footer class="bg-gray-800 p-4 text-white text-center">
-        Made with ❤ by
+    <footer class="bg-gray-800 p-4 text-white text-center flex justify-center items-center gap-4">
+        <a href="https://kiedanski.com/" class="hover:underline flex items-center">
+          Made with <i class="fas fa-heart text-red-500 mr-2 ml-2"> </i> by Diego </a>
+        <span>|</span>
+        <a href="https://github.com/kiedanski/willaidothis.com" class="hover:underline flex items-center" target="_blank">
+            <i class="fab fa-github mr-2"></i>GitHub Project
+        </a>
     </footer>
 </div>
 
