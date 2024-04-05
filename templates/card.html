@@ -13,7 +13,7 @@
     <div class="mb-8">
         <div class="bg-white p-6 rounded-lg border-l-4 border-blue-500 shadow-md">
             <h2 class="text-lg font-semibold mb-4">Prompt</h2>
-	    <p>{{card.prompt | safe}}</p>
+	    <div>{{card.prompt | safe}}</div>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
     <div class="mb-8">
         <div class="bg-white p-6 rounded-lg border-l-4 border-green-500 shadow-md">
             <h2 class="text-lg font-semibold mb-4">Answer</h2>
-	    <p>{{card.answer | safe }}</p>
+	    <div>{{card.answer | safe }}</div>
         </div>
     </div>
 
@@ -30,10 +30,7 @@
     <div>
         <div class="bg-white p-6 rounded-lg border-l-4 border-yellow-500 shadow-md">
             <h2 class="text-lg font-semibold mb-4">Analysis</h2>
-	    <p>{{card.analysis | safe}}</p>
-	     <!-- <pre class="bg-gray-800 text-green-400 p-4 mt-4 rounded-lg overflow-x-auto"><code> -->
-		<!-- {{card.analysis}} -->
-	     <!-- </code></pre> -->
+	    <div>{{card.analysis | safe}}</div>
         </div>
     </div>
     {% endif %}

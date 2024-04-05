@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-xl font-bold mb-4">Frequently Asked Questions</h1>
+    <div id="faq-accordion">
+        {% for item in faq_data %}
+            <div class="mb-2">
+                <button onclick="toggleAnswer(this)" class="w-full text-left p-3 bg-gray-200 hover:bg-gray-300 focus:outline-none font-semibold">
+                    {{ item.Question }}
+                </button>
+                <div class="hidden p-3 bg-white border">
+                    {{ item.Answer }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        function toggleAnswer(button) {
+            var answerDiv = button.nextElementSibling;
+            if (answerDiv.style.display === "block") {
+                answerDiv.style.display = "none";
+            } else {
+                answerDiv.style.display = "block";
+            }
+        }
+    </script>
+{% endblock %}
+

@@ -1,4 +1,5 @@
 .venv/
 data.json
+faq.json
 output.html
 static/
