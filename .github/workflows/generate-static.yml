@@ -29,8 +29,7 @@ jobs:
 
     # Runs a Python script
       - name: Run script
-        run: |
-          python render.py
+        run: PYTHONPATH="$PYTHONPATH:$PWD" python src/main.py
 
       - name: Publish
         uses: cloudflare/pages-action@1
