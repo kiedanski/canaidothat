@@ -2,6 +2,11 @@
   padding: 2pt;
 }
 
+img {
+    width:  600px;
+    height: 600px;
+}
+
 :link { color: #0000EE; }
 
 .about-card a {
