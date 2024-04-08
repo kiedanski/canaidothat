@@ -18,6 +18,7 @@ def setup_static_dirs():
     shutil.copy("libs/htmx.org@1.9.11", "static/")
     shutil.copy("libs/tailwind.min.css", "static/")
     shutil.copy("templates/styles.css", "static/")
+    shutil.copy("templates/wadt.png", "static/img/")
 
 def render_html(template_name, context, output_path):
     template = env.get_template(template_name)
