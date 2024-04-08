@@ -6,10 +6,10 @@
         {% for item in faq_data %}
             <div class="mb-2">
                 <button onclick="toggleAnswer(this)" class="w-full text-left p-3 bg-gray-200 hover:bg-gray-300 focus:outline-none font-semibold">
-                    {{ item.Question }}
+                    {{ item.Question | safe }}
                 </button>
                 <div class="hidden p-3 bg-white border">
-                    {{ item.Answer }}
+                    {{ item.Answer | safe }}
                 </div>
             </div>
         {% endfor %}

@@ -79,6 +79,7 @@ def replace_image_placeholder(field, card):
 
 
 FIELDS_WITH_IMAGES = ["prompt", "answer", "analysis"]
+ALLOWED_TAGS = ['div', 'p','a', 'strong', 'em', 'ul', 'li', 'h1', 'h2', 'h3', 'pre', 'code', 'br', 'img']
 
 def card_to_html(card_json):
 
@@ -95,16 +96,19 @@ def card_to_html(card_json):
 
     card_json["front"] = remove_image_tags(card_json["prompt"].strip())
 
-    for key in ["front", "prompt", "answer", "analysis"]:
+    for key in ["about", "front", "prompt", "answer", "analysis"]:
         text = card_json[key]
         html = markdown_renderer(text) 
+        # safe_html = bleach.clean(html, tags=ALLOWED_TAGS, strip=True)
 
-        card_json[key] = html 
+        # card_json[key] = safe_html
+        card_json[key] = html
 
     
 
     return card_json
 
 def preprocess_data(data) -> List:
+    print(data)
     return [card_to_html(card) for card in data if card["id"]]
 
