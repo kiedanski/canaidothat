@@ -2,7 +2,7 @@
 
 The crowdsourced platform for generative AI experiments
 
-[Visit US](https://willaidothis.com)
+[check it out!](https://willaidothis.com)
 
 # Tech Stack
 
